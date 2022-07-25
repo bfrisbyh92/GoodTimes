@@ -1,9 +1,25 @@
 import PostMessage from '../models/postMessage.js';
 
-export const getPosts = (req, res) => {
-    res.send("working");
+export const getPosts = async (req, res) => {
+        try {
+            const postMessages = await PostMessage.find();
+
+            console.log(postMessages);
+            res.status(200).json(postMessages);
+        }
+        catch (err) {
+            res.status(404).json({ message: err.message });
+        }
 }
 
-export const createPost = (req, res) => {
-    res.send('Post created Route working');
+export const createPost = async (req, res) => {
+        const post = req.body;
+        const newPost = new PostMessage(post);
+    try {
+        await newPost.save();
+        res.status(201).json(newPost)
+    }
+    catch(err) {
+        res.status(409).json({ message: err.message });
+    }
 }
