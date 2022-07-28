@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import useStyles from "./styles";
 import { Button, Typography, Paper, TextField } from "@material-ui/core";
 import FileBase from "react-file-base64";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { createPost, updatePost } from "../../actions/posts";
 
 const Form = ({ currentId, setCurrentId }) => {
@@ -13,8 +13,18 @@ const Form = ({ currentId, setCurrentId }) => {
     tags: "",
     selectedFile: "",
   });
+  const post = useSelector((state) =>
+    currentId ? state.posts.find((p) => p._id === currentId) : null
+  );
   const classes = useStyles();
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (post) {
+      setPostData(post);
+      console.log(post);
+    }
+  }, [post]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -25,9 +35,20 @@ const Form = ({ currentId, setCurrentId }) => {
       dispatch(createPost(postData));
       console.log(dispatch(createPost(postData)));
     }
+    clear();
+    // ^^^ Cleanup function. Either way it gets called.
   };
 
-  const clear = () => {};
+  const clear = () => {
+    setCurrentId(null);
+    setPostData({
+      creator: "",
+      title: "",
+      message: "",
+      tags: "",
+      selectedFile: "",
+    });
+  };
 
   return (
     <Paper className={classes.paper}>
@@ -37,7 +58,9 @@ const Form = ({ currentId, setCurrentId }) => {
         className={`${classes.root} ${classes.form}`}
         onSubmit={handleSubmit}
       >
-        <Typography variant="h6">Share your best moments</Typography>
+        <Typography variant="h6">
+          {currentId ? "Editing" : "Creating"} a GoodTime
+        </Typography>
         <TextField
           name="creator"
           variant="outlined"
