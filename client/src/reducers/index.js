@@ -1,8 +1,8 @@
-// 
+//
 
-import { combineReducers } from 'redux';
+import { combineReducers } from "redux";
 
-import posts from './posts';
+import posts from "./posts";
 
 const reducers = combineReducers({ posts });
 

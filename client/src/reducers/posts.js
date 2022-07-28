@@ -1,16 +1,18 @@
 // eslint-disable-next-line
 export default (posts = [], action) => {
-    switch (action.type){
-        case 'UPDATE':
-            return posts.map((post) => post._id === action.payload ? action.payload : post);
-        case 'FETCH_ALL':
-            return action.payload;
-        case 'CREATE':
-            return [...posts, action.payload];
-        default:
-            return posts;
-    }
- };
+  switch (action.type) {
+    case "UPDATE":
+      return posts.map((post) =>
+        post._id === action.payload ? action.payload : post
+      );
+    case "FETCH_ALL":
+      return action.payload;
+    case "CREATE":
+      return [...posts, action.payload];
+    default:
+      return posts;
+  }
+};
 
 // import { FETCH_ALL, CREATE, UPDATE, DELETE, LIKE } from '../constants/actionTypes';
 
