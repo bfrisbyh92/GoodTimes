@@ -1,0 +1,26 @@
+{
+  "name": "mern-social",
+  "version": "1.0.0",
+  "description": "MERN social Media App",
+  "main": "n/a",
+  "scripts": {
+    "test": "n/a"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bfrisbyh92/GoodTimes.git"
+  },
+  "keywords": [
+    "npm",
+    "init",
+    "to",
+    "use",
+    "stackblitz"
+  ],
+  "author": "Brendan Frisby",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bfrisbyh92/GoodTimes/issues"
+  },
+  "homepage": "https://github.com/bfrisbyh92/GoodTimes#readme"
+}
