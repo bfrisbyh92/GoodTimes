@@ -24,5 +24,7 @@ app.listen(PORT, () => {
 
 mongoose
   .connect(MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => console.log(`Mongodb Connected on Port: ${PORT}`))
+  .then((connected) =>
+    console.log(`Mongodb Connected on ${connected.connection.db.databaseName}`)
+  )
   .catch((err) => console.log(`${err} did not connect`));
