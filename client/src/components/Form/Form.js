@@ -30,10 +30,8 @@ const Form = ({ currentId, setCurrentId }) => {
     e.preventDefault();
     if (currentId) {
       dispatch(updatePost(currentId, postData));
-      console.log(dispatch(updatePost(currentId, postData)));
     } else {
       dispatch(createPost(postData));
-      console.log(dispatch(createPost(postData)));
     }
     clear();
     // ^^^ Cleanup function. Either way it gets called.
