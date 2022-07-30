@@ -4,8 +4,10 @@ export default (posts = [], action) => {
     case "DELETE":
       return posts.filter((post) => post._id !== action.payload);
     case "UPDATE":
+    case "LIKE" :
+    // ^^^ They return the same thing.
       return posts.map((post) =>
-        post._id === action.payload ? action.payload : post
+        post._id === action.payload._id ? action.payload : post
       );
     case "FETCH_ALL":
       return action.payload;
