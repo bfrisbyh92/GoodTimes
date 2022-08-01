@@ -10,6 +10,7 @@ import {
 } from "redux";
 import thunk from "redux-thunk";
 import reducers from "./reducers";
+
 // ^^ Pull in my posts reducer
 const store = createStore(reducers, compose(applyMiddleware(thunk)));
 
