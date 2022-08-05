@@ -6,6 +6,8 @@ import mongoose from "mongoose";
 import cors from "cors";
 
 import postRoutes from "./routes/posts.js";
+import userRoutes from "./routes/users.js";
+
 const app = express();
 
 app.use(express.json({ limit: "30mb", extended: true }));
@@ -17,6 +19,7 @@ const MONGO_URI = process.env.MONGO_URI;
 const PORT = process.env.PORT || 5000;
 
 app.use("/posts", postRoutes);
+app.use("/user", userRoutes);
 
 app.listen(PORT, () => {
   console.log(`GoodTimes app is running on port ${PORT}`);
