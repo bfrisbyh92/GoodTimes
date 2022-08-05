@@ -19,7 +19,7 @@ const MONGO_URI = process.env.MONGO_URI;
 const PORT = process.env.PORT || 5000;
 
 app.use("/posts", postRoutes);
-app.use("/user", userRoutes);
+app.use("/users", userRoutes);
 
 app.listen(PORT, () => {
   console.log(`GoodTimes app is running on port ${PORT}`);
