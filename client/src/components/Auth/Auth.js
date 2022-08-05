@@ -10,12 +10,13 @@ import {
 } from "@material-ui/core";
 // import { GoogleLogin } from "react-google-login";
 import useStyles from "./styles";
-import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+// import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 // import Icon from "./Icon";
 import Input from "./Input";
 import { signin, signup } from '../../actions/auth';
+
 
 const Auth = () => {
   const initialState = {
@@ -51,16 +52,22 @@ const Auth = () => {
 
   const switchMode = () => {
     setIsSignup((prevIsSignup) => !prevIsSignup);
-    handleShowPassword(false);
+    setShowPassword(false);
   };
 
+  const authIcon = "https://cdn-icons-png.flaticon.com/512/295/295128.png"
 
   return (
     <Container component="main" maxWidth="xs">
       <Paper className={classes.paper} elevation={6}>
         <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
-        </Avatar>
+          <img width="50vw" height="50vh" src={authIcon} alt='authIcon' onClick={(e) => {
+              e.preventDefault();
+              navigate('/')
+            }}
+          >
+          </img>
+          </Avatar>
         <Typography component="h1" variant="h5">
           {isSignup ? "Sign up" : "Sign in"}
         </Typography>
