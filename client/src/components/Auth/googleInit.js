@@ -1,5 +1,6 @@
-export let GoogleAuth; // Google Auth object.
-export function initClient() {
+export default GoogleAuth;
+
+export const initClient = () => {
   gapi.client.init({
       'apiKey': process.env.REACT_APP_GOOGLE_API_KEY,
       'clientId': process.env.REACT_APP_GOOGLE_CLIENT_ID,

@@ -48,11 +48,15 @@ export const deletePost = async (req, res) => {
 
 export const likePost = async (req, res) => {
   const { id } = req.params;
+  // ^^ Grabbing the id from req.params
   if (!req.userId) return res.json({ message: "Not Authenticated" });
+  // ^^ If there is no id in req.params, send message not authenticated
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(404).send("No post with that id");
   }
+  /// Using mongoose we are validating the id with their functions
   const post = await PostMessage.findById(id);
+  // ^^ Finding the post that user clicked like on
   const index = post.likes.findIndex((id) => id === String(req.userId));
 
   if (index !== -1) {
@@ -61,10 +65,15 @@ export const likePost = async (req, res) => {
     post.likes = post.likes.filter((id) => id !== String(req.userId));
   }
 
-  const updatedPost = await PostMessage.findByIdAndUpdate(
-    id,
-    post,
-    { new: true }
-  );
+  const updatedPost = await PostMessage.findByIdAndUpdate(id, post, {
+    new: true,
+  });
   res.json(updatedPost);
+  // ^^ This is the logic that allows each user to only like each post one time.
+  // It's saying if you have not yet liked the post and click like, add that like.
+  // Otherwise remove it from the database. It updates the data it receives and sends it back in the response.
+  console.log(
+    `id: ${id}, post: ${post},
+     index: ${index}, updated: ${updatedPost}`
+  );
 };

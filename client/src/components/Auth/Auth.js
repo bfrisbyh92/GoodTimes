@@ -6,15 +6,13 @@ import {
   Grid,
   Typography,
   Container,
-  IconButton,
+  // IconButton,
   /*TextField,*/
 } from "@material-ui/core";
 import { GoogleLogin } from "@react-oauth/google";
 import useStyles from "./styles";
-// import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-// import Icon from "./Icon";
 import Input from "./Input";
 import { signin, signup } from "../../actions/auth";
 
@@ -55,9 +53,10 @@ const Auth = () => {
     setShowPassword(false);
   };
 
-  const responseGoogle = (res) => {
-    console.log(res);
-  };
+  // const responseGoogle = (res) => {
+  //   console.log(res);
+  // };
+
 
   const authIcon = "https://cdn-icons-png.flaticon.com/512/295/295128.png";
 
@@ -130,11 +129,13 @@ const Auth = () => {
             {isSignup ? "Sign Up" : "Sign In"}
           </Button>
           <GoogleLogin
-            onSuccess={(credentialResponse) => {
-              console.log(credentialResponse);
+            onSuccess={(res) => {
+              console.log(res);
+              console.info(`Logged in as clientId = ${res?.clientId} and credentials = ${res?.credential}`);
             }}
-            onError={() => {
+            onError={(err) => {
               console.log("Login Failed");
+              console.error(err);
             }}
             className={classes.googleButton}
             useOneTap
@@ -156,16 +157,3 @@ const Auth = () => {
 };
 
 export default Auth;
-
-// const googleSuccess = async (res) => {
-//   console.log("Working!");
-// };
-
-// const responseGoogle = (response) => {
-//   console.log(response);
-// };
-
-// const googleFailure = (error) => {
-//   console.error(error);
-//   console.error("Google Sign In was unsuccessful. Please try again.");
-// };
