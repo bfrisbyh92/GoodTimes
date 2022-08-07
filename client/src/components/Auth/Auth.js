@@ -6,17 +6,15 @@ import {
   Grid,
   Typography,
   Container,
+  // IconButton,
   /*TextField,*/
 } from "@material-ui/core";
-// import { GoogleLogin } from "react-google-login";
+import { GoogleLogin } from "@react-oauth/google";
 import useStyles from "./styles";
-// import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-// import Icon from "./Icon";
 import Input from "./Input";
-import { signin, signup } from '../../actions/auth';
-
+import { signin, signup } from "../../actions/auth";
 
 const Auth = () => {
   const initialState = {
@@ -39,10 +37,10 @@ const Auth = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(formData);
-    if(isSignup){
-      dispatch(signup(formData, navigate))
+    if (isSignup) {
+      dispatch(signup(formData, navigate));
     } else {
-      dispatch(signin(formData, navigate))
+      dispatch(signin(formData, navigate));
     }
   };
 
@@ -55,19 +53,27 @@ const Auth = () => {
     setShowPassword(false);
   };
 
-  const authIcon = "https://cdn-icons-png.flaticon.com/512/295/295128.png"
+  // const responseGoogle = (res) => {
+  //   console.log(res);
+  // };
+
+  const authIcon = "https://cdn-icons-png.flaticon.com/512/295/295128.png";
 
   return (
     <Container component="main" maxWidth="xs">
       <Paper className={classes.paper} elevation={6}>
         <Avatar className={classes.avatar}>
-          <img width="50vw" height="50vh" src={authIcon} alt='authIcon' onClick={(e) => {
+          <img
+            width="50vw"
+            height="50vh"
+            src={authIcon}
+            alt="authIcon"
+            onClick={(e) => {
               e.preventDefault();
-              navigate('/')
+              navigate("/");
             }}
-          >
-          </img>
-          </Avatar>
+          ></img>
+        </Avatar>
         <Typography component="h1" variant="h5">
           {isSignup ? "Sign up" : "Sign in"}
         </Typography>
@@ -121,26 +127,19 @@ const Auth = () => {
           >
             {isSignup ? "Sign Up" : "Sign In"}
           </Button>
-          {/* <GoogleLogin
-            clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
-            render={(renderProps) => (
-              <Button
-                className={classes.googleButton}
-                color="primary"
-                fullWidth
-                onClick={renderProps.onClick}
-                // disabled={renderProps.disabled}
-                startIcon={<Icon />}
-                variant="contained"
-              >
-                Google Sign In
-              </Button>
-            )}
-            onSuccess={responseGoogle}
-            onFailure={responseGoogle}
-            cookiePolicy="single_host_origin"
-          /> */}
-           {/* ^^^ Come back to this. */}
+          <GoogleLogin
+            onSuccess={(res) => {
+              console.log(res);
+              console.info(`Logged in as clientId = ${res?.clientId} and credentials = ${res?.credential}`);
+            }}
+            onError={(err) => {
+              console.log("Login Failed");
+              console.error(err);
+            }}
+            className={classes.googleButton}
+            useOneTap
+            fullWidth
+          />
           <Grid container justifyContent="flex-end">
             <Grid item>
               <Button onClick={switchMode}>
@@ -157,16 +156,3 @@ const Auth = () => {
 };
 
 export default Auth;
-
-  // const googleSuccess = async (res) => {
-  //   console.log("Working!");
-  // };
-
-  // const responseGoogle = (response) => {
-  //   console.log(response);
-  // };
-
-  // const googleFailure = (error) => {
-  //   console.error(error);
-  //   console.error("Google Sign In was unsuccessful. Please try again.");
-  // };
