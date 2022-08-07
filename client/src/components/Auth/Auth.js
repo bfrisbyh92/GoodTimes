@@ -57,6 +57,7 @@ const Auth = () => {
   //   console.log(res);
   // };
 
+
   const authIcon = "https://cdn-icons-png.flaticon.com/512/295/295128.png";
 
   return (
