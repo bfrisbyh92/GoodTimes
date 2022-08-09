@@ -1,4 +1,4 @@
-import { AUTH } from "../constants/actionsTypes.js";
+import { AUTH } from "../constants/actionTypes.js";
 import * as API from "../API/index.js";
 // import { useNavigate } from 'react-router-dom';
 // const navigate = useNavigate();

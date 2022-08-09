@@ -15,6 +15,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Input from "./Input";
 import { signin, signup } from "../../actions/auth";
+import { AUTH } from "../../constants/actionTypes";
 
 const Auth = () => {
   const initialState = {
@@ -129,13 +130,17 @@ const Auth = () => {
             {isSignup ? "Sign Up" : "Sign In"}
           </Button>
           <GoogleLogin
-            onSuccess={(res) => {
-              console.log(res);
+            onSuccess={async(res) => {
               console.info(`Logged in as clientId = ${res?.clientId} and credentials = ${res?.credential}`);
-            }}
-            onError={(err) => {
-              console.log("Login Failed");
+              console.log(res);
+              const token = res?.credential;
+              try {
+                 dispatch({ type: AUTH, data: { token } });
+
+                navigate('/');
+            } catch (err) {
               console.error(err);
+            };
             }}
             className={classes.googleButton}
             useOneTap

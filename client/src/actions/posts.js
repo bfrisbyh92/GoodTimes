@@ -1,4 +1,4 @@
-import { FETCH_ALL, CREATE, UPDATE, DELETE } from "../constants/actionsTypes";
+import { FETCH_ALL, CREATE, UPDATE, DELETE } from "../constants/actionTypes";
 // ^^^ Safeguard passing in variables instead of strings example type: "FETCH_ALL" || FETCH_ALL
 import * as api from "../API";
 
