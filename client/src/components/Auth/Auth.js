@@ -53,12 +53,7 @@ const Auth = () => {
     setIsSignup((prevIsSignup) => !prevIsSignup);
     setShowPassword(false);
   };
-
-  // const responseGoogle = (res) => {
-  //   console.log(res);
-  // };
-
-
+  
   const authIcon = "https://cdn-icons-png.flaticon.com/512/295/295128.png";
 
   return (
@@ -76,9 +71,7 @@ const Auth = () => {
             }}
           ></img>
         </Avatar>
-        <Typography variant="h5">
-          {isSignup ? "Sign up" : "Sign in"}
-        </Typography>
+        <Typography variant="h5">{isSignup ? "Sign up" : "Sign in"}</Typography>
         <form className={classes.form} onSubmit={handleSubmit}>
           <Grid container spacing={2}>
             {isSignup && (
@@ -130,17 +123,19 @@ const Auth = () => {
             {isSignup ? "Sign Up" : "Sign In"}
           </Button>
           <GoogleLogin
-            onSuccess={async(res) => {
-              console.info(`Logged in as clientId = ${res?.clientId} and credentials = ${res?.credential}`);
+            onSuccess={async (res) => {
+              console.info(
+                `Logged in as clientId = ${res?.clientId} and credentials = ${res?.credential}`
+              );
               console.log(res);
               const token = res?.credential;
               try {
-                 dispatch({ type: AUTH, data: { token } });
+                dispatch({ type: AUTH, data: { token } });
 
-                navigate('/');
-            } catch (err) {
-              console.error(err);
-            };
+                navigate("/");
+              } catch (err) {
+                console.error(err);
+              }
             }}
             className={classes.googleButton}
             useOneTap
@@ -161,4 +156,4 @@ const Auth = () => {
   );
 };
 
-export default Auth
+export default Auth;
