@@ -25,6 +25,7 @@ const auth = async (req, res, next) => {
       // req.userId is getting sent to controllers and read
     } else {
       decodedData = jwt.decode(token);
+      console.log(decodedData);
       req.userId = decodedData?.sub;
       console.log(`req.userId is Google sub#: ${req?.userId}`);
     }

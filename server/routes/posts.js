@@ -9,5 +9,6 @@ router.post("/", auth, createPost);
 router.patch("/:id", auth, updatePost);
 router.patch('/:id/likePost', auth,  likePost);
 router.delete("/:id", auth, deletePost);
+// ^^^ To post/patch/delete your JWT token has to be verified. Implementing Authorization.
 
 export default router;
