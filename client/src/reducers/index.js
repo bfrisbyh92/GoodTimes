@@ -1,10 +1,10 @@
-//
+
 
 import { combineReducers } from "redux";
 
 import posts from "./posts";
-// import users from "./users";
+import auth from "./auth";
 
-const reducers = combineReducers({ posts/*, users */});
+const reducers = combineReducers({ posts, auth });
 
 export default reducers;

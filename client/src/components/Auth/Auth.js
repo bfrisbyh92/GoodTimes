@@ -63,7 +63,7 @@ const Auth = () => {
 
   return (
     <Container component="main" maxWidth="xs">
-      <Paper className={classes.paper} elevation={6}>
+      <Paper className={classes.paper} elevation={3}>
         <Avatar className={classes.avatar}>
           <img
             width="50vw"
@@ -76,7 +76,7 @@ const Auth = () => {
             }}
           ></img>
         </Avatar>
-        <Typography component="h1" variant="h5">
+        <Typography variant="h5">
           {isSignup ? "Sign up" : "Sign in"}
         </Typography>
         <form className={classes.form} onSubmit={handleSubmit}>
