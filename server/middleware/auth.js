@@ -12,8 +12,8 @@ const auth = async (req, res, next) => {
   try {
     const token = req.headers.authorization?.split(" ")[1];
     console.log(`token: ${token}`);
-    const isCustomAuth = token?.length < 500;
-
+    const isCustomAuth = token.length < 500;
+    // Token is pulled in from request headers. axios interceptor is sending the token inside API directory file index.js
     let decodedData;
 
     if (token && isCustomAuth) {
@@ -23,16 +23,15 @@ const auth = async (req, res, next) => {
         `req.userId from personally created auth token: ${req?.userId}`
       );
       // req.userId is getting sent to controllers and read
-    } else {
+    } /* else {
       decodedData = jwt.decode(token);
       console.log(decodedData);
       req.userId = decodedData?.sub;
       console.log(`req.userId is Google sub#: ${req?.userId}`);
-    }
+    }*/
     next();
     // ^^^ I'm taking the request headers and isolating the token. Verifying it's authorized
     // and then letting things proceed by calling next if everything checks out.
-    // Optional chaining so nothing breaks if someone attemps to do something unauthorized.
   } catch (err) {
     console.error(err);
   }

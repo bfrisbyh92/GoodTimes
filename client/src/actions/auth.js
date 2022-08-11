@@ -4,7 +4,7 @@ import * as API from "../API/index.js";
 export const signin = (formData, navigate) => async (dispatch) => {
   try {
     const { data } = await API.signIn(formData);
-    console.log(data);
+    console.log(`actions/auth signIn function data: ${data}`);
 
     dispatch({ type: AUTH, data });
 
@@ -17,7 +17,7 @@ export const signin = (formData, navigate) => async (dispatch) => {
 export const signup = (formData, navigate) => async (dispatch) => {
   try {
     const { data } = await API.signUp(formData);
-    console.log(data);
+    console.log(`actions/auth signUp data: ${data}`);
 
     dispatch({ type: AUTH, data });
 

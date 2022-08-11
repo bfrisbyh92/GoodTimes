@@ -7,7 +7,6 @@ import { createPost, updatePost } from "../../actions/posts";
 
 const Form = ({ currentId, setCurrentId }) => {
   const [postData, setPostData] = useState({
-    creator: "",
     title: "",
     message: "",
     tags: "",
@@ -16,6 +15,7 @@ const Form = ({ currentId, setCurrentId }) => {
   const post = useSelector((state) =>
     currentId ? state.posts.find((p) => p._id === currentId) : null
   );
+  const user = JSON.parse(localStorage.getItem('profile'));
   const classes = useStyles();
   const dispatch = useDispatch();
 
@@ -26,21 +26,21 @@ const Form = ({ currentId, setCurrentId }) => {
     }
   }, [post]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (currentId) {
-      dispatch(updatePost(currentId, postData));
+
+    if (currentId === 0) {
+      dispatch(createPost({ ...postData, name: user?.result?.name || user?.result?.email }));
+      clear();
     } else {
-      dispatch(createPost(postData));
+      dispatch(updatePost(currentId, { ...postData, name: user?.result?.name || user?.result?.email }));
+      clear();
     }
-    clear();
-    // ^^^ Cleanup function. Either way it gets called.
   };
 
   const clear = () => {
     setCurrentId(0);
     setPostData({
-      creator: "",
       title: "",
       message: "",
       tags: "",
@@ -59,17 +59,7 @@ const Form = ({ currentId, setCurrentId }) => {
         <Typography variant="h6">
           {currentId ? "Editing" : "Creating"} a GoodTime
         </Typography>
-        <TextField
-          name="creator"
-          variant="outlined"
-          label="Creator"
-          fullWidth
-          value={postData.creator}
-          onChange={(e) =>
-            setPostData({ ...postData, creator: e.target.value })
-          }
-          // ^^^ Have to use the spread operator. If I just put setPostData to e.target.value if only one area is changed it will reset all fields without spread operator.
-        />
+        
         <TextField
           name="title"
           variant="outlined"

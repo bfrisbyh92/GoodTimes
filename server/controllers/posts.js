@@ -14,7 +14,7 @@ export const getPosts = async (req, res) => {
 
 export const createPost = async (req, res) => {
   const post = req.body;
-  const newPost = new PostMessage(post);
+  const newPost = new PostMessage({ ...post, creator: req.userId, createdAt: new Date().toISOString() });
   try {
     await newPost.save();
     res.status(201).json(newPost);
@@ -59,7 +59,7 @@ export const likePost = async (req, res) => {
   // ^^ Finding the post that user clicked like on
   const index = post.likes.findIndex((id) => id === String(req.userId));
 
-  if (index !== -1) {
+  if (index === -1) {
     post.likes.push(req.userId);
   } else {
     post.likes = post.likes.filter((id) => id !== String(req.userId));
