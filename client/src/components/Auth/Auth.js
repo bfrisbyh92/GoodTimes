@@ -9,13 +9,13 @@ import {
   // IconButton,
   /*TextField,*/
 } from "@material-ui/core";
-import { GoogleLogin } from "@react-oauth/google";
+// import { GoogleLogin } from "@react-oauth/google";
 import useStyles from "./styles";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Input from "./Input";
 import { signin, signup } from "../../actions/auth";
-import { AUTH } from "../../constants/actionTypes";
+// import { AUTH } from "../../constants/actionTypes";
 
 const Auth = () => {
   const initialState = {
@@ -122,7 +122,7 @@ const Auth = () => {
           >
             {isSignup ? "Sign Up" : "Sign In"}
           </Button>
-          <GoogleLogin
+          {/* <GoogleLogin
             onSuccess={async (res) => {
               console.info(
                 `Logged in as clientId = ${res?.clientId} and credentials = ${res?.credential}`
@@ -140,7 +140,7 @@ const Auth = () => {
             className={classes.googleButton}
             useOneTap
             fullWidth
-          />
+          /> */}
           <Grid container justifyContent="flex-end">
             <Grid item>
               <Button onClick={switchMode}>
