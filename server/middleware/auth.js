@@ -23,7 +23,7 @@ const auth = async (req, res, next) => {
         `req.userId from personally created auth token: ${req?.userId}`
       );
       // req.userId is getting sent to controllers and read
-    }  else {
+    } else {
       decodedData = jwt.decode(token);
       console.log(decodedData);
       req.userId = decodedData?.sub;
