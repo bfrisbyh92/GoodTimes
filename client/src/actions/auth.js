@@ -27,6 +27,6 @@ export const signup = (formData, navigate) => async (dispatch) => {
   }
 };
 
-// This flow is going from inside the form component on submit. Then dispatching the signin/signup actions to redux. 
+// This flow is going from inside the form component on submit. Then dispatching the signin/signup actions to redux.
 // On dispatch it gets sent here to actions. These actions make a call to my API, signs in, and grabs the user data.
 //  Sending it to the reducers after that. Reducters will set the current users profile and data to localStorage.

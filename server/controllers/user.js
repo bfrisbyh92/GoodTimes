@@ -63,4 +63,3 @@ export const signup = async (req, res) => {
   }
 };
 // ^^^ Sign up is almost exactly the same as sigin so no comments.
-

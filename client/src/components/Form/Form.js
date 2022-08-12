@@ -58,15 +58,15 @@ const Form = ({ currentId, setCurrentId }) => {
     });
   };
 
-  if(!user?.result?.name){
+  if (!user?.result?.name) {
     return (
       <Paper className={classes.paper}>
         <Typography variant="h4" align="center">
           Please Sign In to create or like posts
         </Typography>
       </Paper>
-    )
-  };
+    );
+  }
 
   return (
     <Paper className={classes.paper}>
