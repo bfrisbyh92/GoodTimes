@@ -15,7 +15,7 @@ const Form = ({ currentId, setCurrentId }) => {
   const post = useSelector((state) =>
     currentId ? state.posts.find((p) => p._id === currentId) : null
   );
-  const user = JSON.parse(localStorage.getItem('profile'));
+  const user = JSON.parse(localStorage.getItem("profile"));
   const classes = useStyles();
   const dispatch = useDispatch();
 
@@ -30,10 +30,20 @@ const Form = ({ currentId, setCurrentId }) => {
     e.preventDefault();
 
     if (currentId === 0) {
-      dispatch(createPost({ ...postData, name: user?.result?.name || user?.result?.email }));
+      dispatch(
+        createPost({
+          ...postData,
+          name: user?.result?.name,
+        })
+      );
       clear();
     } else {
-      dispatch(updatePost(currentId, { ...postData, name: user?.result?.name || user?.result?.email }));
+      dispatch(
+        updatePost(currentId, {
+          ...postData,
+          name: user?.result?.name,
+        })
+      );
       clear();
     }
   };
@@ -48,6 +58,16 @@ const Form = ({ currentId, setCurrentId }) => {
     });
   };
 
+  if(!user?.result?.name){
+    return (
+      <Paper className={classes.paper}>
+        <Typography variant="h4" align="center">
+          Please Sign In to create or like posts
+        </Typography>
+      </Paper>
+    )
+  };
+
   return (
     <Paper className={classes.paper}>
       <form
@@ -59,7 +79,7 @@ const Form = ({ currentId, setCurrentId }) => {
         <Typography variant="h6">
           {currentId ? "Editing" : "Creating"} a GoodTime
         </Typography>
-        
+
         <TextField
           name="title"
           variant="outlined"
@@ -83,7 +103,7 @@ const Form = ({ currentId, setCurrentId }) => {
         <TextField
           name="tags"
           variant="outlined"
-          label="Tags (coma separated)"
+          label="Tags (comma separated)"
           fullWidth
           value={postData.tags}
           onChange={(e) =>
