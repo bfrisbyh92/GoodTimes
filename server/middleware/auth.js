@@ -23,12 +23,12 @@ const auth = async (req, res, next) => {
         `req.userId from personally created auth token: ${req?.userId}`
       );
       // req.userId is getting sent to controllers and read
-    } /* else {
+    }  else {
       decodedData = jwt.decode(token);
       console.log(decodedData);
       req.userId = decodedData?.sub;
       console.log(`req.userId is Google sub#: ${req?.userId}`);
-    }*/
+    }
     next();
     // ^^^ I'm taking the request headers and isolating the token. Verifying it's authorized
     // and then letting things proceed by calling next if everything checks out.
