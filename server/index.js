@@ -21,6 +21,10 @@ const PORT = process.env.PORT || 5000;
 app.use("/posts", postRoutes);
 app.use("/users", userRoutes);
 
+app.get('/', (req, res) => {
+  res.send('Backend up and running');
+});
+
 app.listen(PORT, () => {
   console.log(`GoodTimes app is running on port ${PORT}`);
 });

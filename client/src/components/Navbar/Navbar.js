@@ -15,8 +15,6 @@ const Navbar = () => {
   const navigate = useNavigate();
   const classes = useStyles();
 
-  // Note to come back and fix NavBar to include users initials and avatar. It is setup to do so now but I don't have a profile object to fill the fields in. My idea is to just make an axios get request to MongoDb with the authenticated users ID and pull the correct information to pupulate the fields.
-  // Solution I found is using the Google Peoples API. Will come back and add.
   const logout = () => {
     dispatch({ type: actionType.LOGOUT });
 
