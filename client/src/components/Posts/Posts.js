@@ -9,9 +9,6 @@ const Posts = ({ setCurrentId }) => {
   // ^^^ posts coming from client/src/reducers/index.js
   const classes = useStyles();
 
-  console.log(posts);
-  // ^^ Should show empty array at this point
-
   return !posts.length ? (
     <CircularProgress />
   ) : (
