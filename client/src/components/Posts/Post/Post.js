@@ -37,6 +37,9 @@ const Post = ({ post, setCurrentId }) => {
         </>
       );
     }
+    // the logic here is .. checking if the specific post has any likes inside the likes array,
+    // and if so is the current users id inside the likes array. Based off both we can
+    // toggle this specific user like/unlike and show how many likes total in the array.
 
     return (
       <>
@@ -101,6 +104,7 @@ const Post = ({ post, setCurrentId }) => {
           <Likes />
         </Button>
         {user?.result?._id === post?.creator && (
+        // Only show this button if the signed in userId is the same as creator should be set to the same value.
           <Button
             size="small"
             color="secondary"
