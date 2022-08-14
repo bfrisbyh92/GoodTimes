@@ -50,7 +50,7 @@ const Post = ({ post, setCurrentId }) => {
   };
 
   return (
-    <Card className={classes.card}>
+    <Card className={classes.card} raised elevation={6}>
       <CardMedia
         className={classes.media}
         image={
@@ -104,7 +104,7 @@ const Post = ({ post, setCurrentId }) => {
           <Likes />
         </Button>
         {user?.result?._id === post?.creator && (
-        // Only show this button if the signed in userId is the same as creator should be set to the same value.
+          // Only show this button if the signed in userId is the same as creator should be set to the same value.
           <Button
             size="small"
             color="secondary"
