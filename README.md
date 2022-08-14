@@ -31,4 +31,14 @@
 mern-social/images/logo.png
 ### Still needs to be done -- Personal Notes
 
-- Search is working with Redux when you pass it a searchQuery but not for searching a tag. Right now it logs you out if you search a tag. 
+- Search is working with Redux when you pass it a searchQuery but not for searching a tag. Right now it logs you out if you search a tag.
+
+- Remove unnecessary console.logs before deployment
+
+- Finish Pagination
+
+- Add Anylytics
+
+- Possibly change background SVG or change to a better image
+
+- Fix CORS on Server to be more secure before deployment

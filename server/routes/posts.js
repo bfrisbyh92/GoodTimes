@@ -11,6 +11,7 @@ import auth from "../middleware/auth.js";
 
 const router = express.Router();
 
+// Routes start with localhost:3000/posts
 router.get("/search", getPostsBySearch);
 router.get("/", getPosts);
 router.post("/", auth, createPost);

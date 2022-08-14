@@ -19,6 +19,9 @@ export const getPostsBySearch = async (req, res) => {
     const posts = await PostMessage.find({
       $or: [{ title }, { tags: { $in: tags.split(",") } }],
     });
+    console.log(
+      `posts being fetched inside controllers/posts.js by function getPostsBySearch using await. Data of posts: ${posts}, defined by JS RegExp the title: ${title}`
+    );
     res.json({ data: posts });
   } catch (err) {
     res.status(404).json({ message: err.message });

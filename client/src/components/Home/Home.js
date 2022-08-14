@@ -41,8 +41,11 @@ const Home = () => {
   }, [currentId, dispatch]);
 
   const searchPost = () => {
-    if (search.trim()|| tags) {
+    if (search.trim() || tags) {
       dispatch(getPostsBySearch({ search, tags: tags.join(",") }));
+      navigate(
+        `/posts/search?searchQuery=${search || "none"}&tags=${tags.join(",")}`
+      );
     } else {
       navigate("/");
     }
@@ -54,10 +57,10 @@ const Home = () => {
     }
   };
 
-  const handleAddChip = (tag) => setTags([...tags, tag]);
+  const handleAdd = (tag) => setTags([...tags, tag]);
 
-  const handleDeleteChip = (chipToDelete) =>
-    setTags(tags.filter((tag) => tag !== chipToDelete));
+  const handleDelete = (tagToDelete) =>
+    setTags(tags.filter((tag) => tag !== tagToDelete));
 
   return (
     <Grow in>
@@ -90,8 +93,8 @@ const Home = () => {
               <ChipInput
                 style={{ margin: "10px 0" }}
                 value={tags}
-                onAdd={(chip) => handleAddChip(chip)}
-                onDelete={(chip) => handleDeleteChip(chip)}
+                onAdd={(tag) => handleAdd(tag)}
+                onDelete={(tag) => handleDelete(tag)}
                 label="Search Tags"
                 variant="outlined"
               />
