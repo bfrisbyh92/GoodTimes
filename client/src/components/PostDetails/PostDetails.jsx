@@ -1,9 +1,10 @@
-import React from 'react'
+import React from "react";
 
 const PostDetails = () => {
+  console.log("PostDetails component rendered.");
   return (
-    <div>PostDetails</div>
-  )
-}
+      <div>PostDetails</div>
+  );
+};
 
-export default PostDetails
+export default PostDetails;

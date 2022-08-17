@@ -122,25 +122,6 @@ const Auth = () => {
           >
             {isSignup ? "Sign Up" : "Sign In"}
           </Button>
-          {/* <GoogleLogin
-            onSuccess={async (res) => {
-              console.info(
-                `Logged in as clientId = ${res?.clientId} and credentials = ${res?.credential}`
-              );
-              console.log(res);
-              const token = res?.credential;
-              try {
-                dispatch({ type: AUTH, data: { token } });
-
-                navigate("/");
-              } catch (err) {
-                console.error(err);
-              }
-            }}
-            className={classes.googleButton}
-            useOneTap
-            fullWidth
-          /> */}
           <Grid container justifyContent="flex-end">
             <Grid item>
               <Button onClick={switchMode}>

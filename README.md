@@ -42,3 +42,5 @@ mern-social/images/logo.png
 - Possibly change background SVG or change to a better image
 
 - Fix CORS on Server to be more secure before deployment
+
+- Add Back Button somewhere
