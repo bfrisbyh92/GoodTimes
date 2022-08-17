@@ -6,6 +6,7 @@ import {
   CardMedia,
   Button,
   Typography,
+  ButtonBase,
 } from "@material-ui/core/";
 import useStyles from "./styles";
 import ThumbUpAltIcon from "@material-ui/icons/ThumbUpAlt";
@@ -49,8 +50,14 @@ const Post = ({ post, setCurrentId }) => {
     );
   };
 
+  // const openPost = () => {
+
+  // };
+
   return (
     <Card className={classes.card} raised elevation={6}>
+    {/* <ButtonBase className={classes.cardAction} onClick={openPost}> */}
+    
       <CardMedia
         className={classes.media}
         image={
@@ -65,6 +72,7 @@ const Post = ({ post, setCurrentId }) => {
           {moment(post.createdAt).fromNow()}
         </Typography>
       </div>
+    {/* </ButtonBase> */}
       {user?.result?._id === post?.creator && (
         <div className={classes.overlay2}>
           <Button
