@@ -4,6 +4,8 @@ import {
   UPDATE,
   DELETE,
   FETCH_BY_SEARCH,
+  START_LOADING,
+  END_LOADING,
 } from "../constants/actionTypes";
 // ^^^ Safeguard passing in variables instead of strings example type: "FETCH_ALL" || FETCH_ALL
 import * as api from "../API";
@@ -11,9 +13,11 @@ import * as api from "../API";
 // Action Creators
 export const getPosts = (page) => async (dispatch) => {
   try {
+    dispatch({ type: START_LOADING });
     const { data } = await api.fetchPosts(page);
     console.log(data);
     dispatch({ type: FETCH_ALL, payload: data });
+    dispatch({ type: END_LOADING });
   } catch (err) {
     console.error(err);
   }
@@ -21,6 +25,7 @@ export const getPosts = (page) => async (dispatch) => {
 
 export const getPostsBySearch = (searchQuery) => async (dispatch) => {
   try {
+    dispatch({ type: START_LOADING });
     const {
       data: { data },
     } = await api.fetchPostsBySearch(searchQuery);
@@ -28,6 +33,7 @@ export const getPostsBySearch = (searchQuery) => async (dispatch) => {
       `getPostsBySearch data consoled inside actions/post and being dispatched inside Home component::: ${data}`
     );
     dispatch({ type: FETCH_BY_SEARCH, payload: data });
+    dispatch({ type: END_LOADING });
   } catch (err) {
     console.error(err);
   }
@@ -35,8 +41,10 @@ export const getPostsBySearch = (searchQuery) => async (dispatch) => {
 
 export const createPost = (post) => async (dispatch) => {
   try {
+    dispatch({ type: START_LOADING });
     const { data } = await api.createPost(post);
     dispatch({ type: CREATE, payload: data });
+    dispatch({ type: END_LOADING });
   } catch (err) {
     console.error(err);
   }
