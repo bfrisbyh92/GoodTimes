@@ -31,6 +31,7 @@ const Home = () => {
   const navigate = useNavigate();
   const query = useQuery();
   const page = query.get("page") || 1;
+  // Get the correct Page being selected or default to 1
   const searchQuery = query.get("searchQuery");
   // Getting the page or search query from the URL for pagination.
 
@@ -41,7 +42,7 @@ const Home = () => {
   }, [currentId, dispatch]);
 
   const searchPost = () => {
-    if (search.trim() || tags) {
+    if (search.trim().length || tags.length) {
       dispatch(getPostsBySearch({ search, tags: tags.join(",") }));
       navigate(
         `/posts/search?searchQuery=${search || "none"}&tags=${tags.join(",")}`
@@ -53,6 +54,7 @@ const Home = () => {
 
   const handleKeyPress = (e) => {
     if (e.keyCode === 13) {
+      // 13 is the enter key
       searchPost();
     }
   };
@@ -85,7 +87,7 @@ const Home = () => {
                 onKeyDown={handleKeyPress}
                 name="search"
                 variant="outlined"
-                label="Search Memories"
+                label="Search Posts..."
                 fullWidth
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}

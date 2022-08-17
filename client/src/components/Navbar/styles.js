@@ -18,7 +18,8 @@ export default makeStyles((theme) => ({
     color: theme.palette.primary.main,
     textDecoration: "none",
     fontSize: "4em",
-    fontWeight: 300,
+    fontWeight: 350,
+    marginLeft: "20px",
   },
   image: {
     marginLeft: "10px",

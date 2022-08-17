@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import decode from "jwt-decode";
 
 import GoodTimes from "../../images/GoodTimes.png";
+// import GoodTimesTextImage from '../../images'
 import * as actionType from "../../constants/actionTypes";
 import useStyles from "./styles";
 
@@ -40,6 +41,7 @@ const Navbar = () => {
   return (
     <AppBar className={classes.appBar} position="static" color="inherit">
       <div className={classes.brandContainer}>
+        <img className={classes.image} src={GoodTimes} alt="icon" height="120" width="120vw" />
         <Typography
           component={Link}
           to="/"
@@ -49,7 +51,6 @@ const Navbar = () => {
         >
           GoodTimes
         </Typography>
-        <img className={classes.image} src={GoodTimes} alt="icon" height="60" />
       </div>
       <Toolbar className={classes.toolbar}>
         {user ? (
