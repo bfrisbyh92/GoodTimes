@@ -5,7 +5,7 @@ import {
   DELETE,
   FETCH_BY_SEARCH,
   START_LOADING,
-  // FETCH_POST,
+  FETCH_POST,
   END_LOADING,
 } from "../constants/actionTypes";
 // ^^^ Safeguard passing in variables instead of strings example type: "FETCH_ALL" || FETCH_ALL
@@ -28,8 +28,8 @@ export default (state = [], action) => {
         posts: state.posts.filter((post) => post._id !== action.payload),
       };
     case UPDATE:
-    // case LIKE is same as UPDATE I could put
-    // case LIKE: and let them return the same thing but I choose to remove it. Not necessary.
+      // case LIKE is same as UPDATE I could put
+      // case LIKE: and let them return the same thing but I choose to remove it. Not necessary.
       return {
         ...state,
         posts: state.posts.map((post) =>
@@ -43,8 +43,8 @@ export default (state = [], action) => {
         currentPage: action.payload.currentPage,
         numberOfPages: action.payload.numberOfPages,
       };
-    // case FETCH_POST:
-    //   return { ...state, post: action.payload.post };
+    case FETCH_POST:
+      return { ...state, post: action.payload };
     case CREATE:
       return { ...state, posts: [...state.posts, action.payload] };
     default:

@@ -6,41 +6,43 @@ import {
   CardMedia,
   Button,
   Typography,
-  ButtonBase,
 } from "@material-ui/core/";
-import useStyles from "./styles";
 import ThumbUpAltIcon from "@material-ui/icons/ThumbUpAlt";
-import ThumbUpAltOutlined from "@material-ui/icons/ThumbUpAltOutlined";
 import DeleteIcon from "@material-ui/icons/Delete";
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
-import moment from "moment";
+import InfoIcon from "@material-ui/icons/InfoOutlined";
+import ThumbUpAltOutlined from "@material-ui/icons/ThumbUpAltOutlined";
 import { useDispatch } from "react-redux";
-import { deletePost, likePost } from "../../../actions/posts";
+import moment from "moment";
+import { useNavigate } from "react-router-dom";
+
+// eslint-disable-next-line
+import { getPost, likePost, deletePost } from "../../../actions/posts";
+import useStyles from "./styles";
 
 const Post = ({ post, setCurrentId }) => {
-  const classes = useStyles();
   const dispatch = useDispatch();
+  const classes = useStyles();
   const user = JSON.parse(localStorage.getItem("profile"));
+  const navigate = useNavigate();
 
   const Likes = () => {
     if (post?.likes?.length > 0) {
       return post.likes.find((like) => like === user?.result?._id) ? (
         <>
-          <ThumbUpAltIcon fontSize="small" /> {"  "}{" "}
+          <ThumbUpAltIcon fontSize="small" />
+          {"  "}
           {post.likes.length > 2
             ? `You and ${post.likes.length - 1} others`
             : `${post.likes.length} like${post.likes.length > 1 ? "s" : ""}`}
         </>
       ) : (
         <>
-          <ThumbUpAltOutlined fontSize="small" /> {"  "} {post.likes.length}{" "}
-          {post.likes.length === 1 ? "Like" : "Likes"}
+          <ThumbUpAltOutlined fontSize="small" />
+          {"  "}{post.likes.length} {post.likes.length === 1 ? "Like" : "Likes"}
         </>
       );
     }
-    // the logic here is .. checking if the specific post has any likes inside the likes array,
-    // and if so is the current users id inside the likes array. Based off both we can
-    // toggle this specific user like/unlike and show how many likes total in the array.
 
     return (
       <>
@@ -50,14 +52,14 @@ const Post = ({ post, setCurrentId }) => {
     );
   };
 
-  // const openPost = () => {
+  const openPost = () => {
+    // dispatch(getPost(post._id, navigate));
 
-  // };
+    navigate(`/posts/${post._id}`);
+  };
 
   return (
     <Card className={classes.card} raised elevation={6}>
-    {/* <ButtonBase className={classes.cardAction} onClick={openPost}> */}
-    
       <CardMedia
         className={classes.media}
         image={
@@ -66,21 +68,24 @@ const Post = ({ post, setCurrentId }) => {
         }
         title={post.title}
       />
+      {/* </ButtonBase> */}
       <div className={classes.overlay}>
         <Typography variant="h6">{post.name}</Typography>
         <Typography variant="body2">
           {moment(post.createdAt).fromNow()}
         </Typography>
       </div>
-    {/* </ButtonBase> */}
       {user?.result?._id === post?.creator && (
-        <div className={classes.overlay2}>
+        <div className={classes.overlay2} name="edit">
           <Button
+            onClick={(e) => {
+              e.stopPropagation();
+              setCurrentId(post._id);
+            }}
             style={{ color: "white" }}
             size="small"
-            onClick={() => setCurrentId(post._id)}
           >
-            <MoreHorizIcon fontSize="large" />
+            <MoreHorizIcon fontSize="medium" />
           </Button>
         </div>
       )}
@@ -99,7 +104,7 @@ const Post = ({ post, setCurrentId }) => {
       </Typography>
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
-          {post.message}
+          {post.message.split(" ").splice(0, 20).join(" ")}...
         </Typography>
       </CardContent>
       <CardActions className={classes.cardActions}>
@@ -111,15 +116,16 @@ const Post = ({ post, setCurrentId }) => {
         >
           <Likes />
         </Button>
+        <Button size="medium" color="inherit" onClick={openPost}>
+          <InfoIcon size={24} variant="outlined"/>
+        </Button>
         {user?.result?._id === post?.creator && (
-          // Only show this button if the signed in userId is the same as creator should be set to the same value.
           <Button
             size="small"
             color="secondary"
             onClick={() => dispatch(deletePost(post._id))}
           >
-            <DeleteIcon fontSize="small" />
-            {"  "} Delete
+            <DeleteIcon fontSize="small" /> {"  "} Delete
           </Button>
         )}
       </CardActions>

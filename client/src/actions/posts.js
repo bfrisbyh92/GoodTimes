@@ -6,6 +6,7 @@ import {
   FETCH_BY_SEARCH,
   START_LOADING,
   END_LOADING,
+  FETCH_POST,
 } from "../constants/actionTypes";
 // ^^^ Safeguard passing in variables instead of strings example type: "FETCH_ALL" || FETCH_ALL
 import * as api from "../API";
@@ -17,6 +18,18 @@ export const getPosts = (page) => async (dispatch) => {
     const { data } = await api.fetchPosts(page);
     console.log(data);
     dispatch({ type: FETCH_ALL, payload: data });
+    dispatch({ type: END_LOADING });
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+export const getPost = (id) => async (dispatch) => {
+  try {
+    dispatch({ type: START_LOADING });
+    const { data } = await api.fetchPost(id);
+    console.log(data);
+    dispatch({ type: FETCH_POST, payload: data });
     dispatch({ type: END_LOADING });
   } catch (err) {
     console.error(err);
