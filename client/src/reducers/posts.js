@@ -44,7 +44,7 @@ export default (state = [], action) => {
         numberOfPages: action.payload.numberOfPages,
       };
     case FETCH_POST:
-      return { ...state, post: action.payload.post };
+      return { ...state, post: action.payload };
     case CREATE:
       return { ...state, posts: [...state.posts, action.payload] };
     default:

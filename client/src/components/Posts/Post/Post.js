@@ -52,8 +52,8 @@ const Post = ({ post, setCurrentId }) => {
     );
   };
 
-  const openPost = (e) => {
-    // dispatch(getPost(post._id, history));
+  const openPost = () => {
+    // dispatch(getPost(post._id, navigate));
 
     navigate(`/posts/${post._id}`);
   };
