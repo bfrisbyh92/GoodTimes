@@ -7,6 +7,7 @@ import {
   START_LOADING,
   END_LOADING,
   FETCH_POST,
+  COMMENT,
 } from "../constants/actionTypes";
 // ^^^ Safeguard passing in variables instead of strings example type: "FETCH_ALL" || FETCH_ALL
 import * as api from "../API";
@@ -61,6 +62,18 @@ export const createPost = (post, navigate) => async (dispatch) => {
     navigate(`/posts/${data._id}`);
   } catch (err) {
     console.error(err);
+  }
+};
+
+export const commentPost = (value, id) => async (dispatch) => {
+  try {
+    const { data } = await api.comment(value, id);
+
+    dispatch({ type: COMMENT, payload: data });
+
+    return data.comments;
+  } catch (error) {
+    console.log(error);
   }
 };
 
