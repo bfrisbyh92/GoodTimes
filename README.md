@@ -11,10 +11,11 @@
 
 - MongoDB
 - Jsonwebtokens
+- OAuth
 - Bcryptjs
 - Pagination
 - Express.js
-- Google Login Authentication
+- Authentication and Authorization
 - Traditional email/hashed password authentication
 - Material-UI for CSS
 - SVG background image
