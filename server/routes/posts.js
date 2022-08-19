@@ -7,6 +7,7 @@ import {
   likePost,
   getPost,
   getPostsBySearch,
+  commentPost,
 } from "../controllers/posts.js";
 import auth from "../middleware/auth.js";
 
@@ -20,6 +21,7 @@ router.post("/", auth, createPost);
 router.patch("/:id", auth, updatePost);
 router.patch("/:id/likePost", auth, likePost);
 router.delete("/:id", auth, deletePost);
+router.post('/:id/commentPost', commentPost);
 // ^^^ To post/patch/delete your JWT token has to be verified. Implementing Authorization.
 
 export default router;

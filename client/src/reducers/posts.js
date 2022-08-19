@@ -7,12 +7,23 @@ import {
   START_LOADING,
   FETCH_POST,
   END_LOADING,
+  COMMENT,
 } from "../constants/actionTypes";
 // ^^^ Safeguard passing in variables instead of strings example type: "FETCH_ALL" || FETCH_ALL
 
 // eslint-disable-next-line
 export default (state = [], action) => {
   switch (action.type) {
+    case COMMENT:
+      return {
+        ...state,
+        posts: state.posts.map((post) => {
+          if (post._id == +action.payload._id) {
+            return action.payload;
+          }
+          return post;
+        }),
+      };
     case START_LOADING:
       return { ...state, isLoading: true };
     case END_LOADING:
