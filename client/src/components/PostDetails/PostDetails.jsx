@@ -43,9 +43,9 @@ const PostDetails = () => {
   // Checks if there is no post or if still in loading state.
 
   const openPost = (_id) => navigate(`/posts/${_id}`);
-  const recommendedPosts = posts.filter(({ _id }) => _id !== post._id);
+  const recommendedPosts = posts?.filter(({ _id }) => _id !== post._id);
   // This is getting all the similiar posts but excludes the current post being viewed already on this DetailsPage component.
-  console.log(recommendedPosts);
+
   return (
     <Paper style={{ padding: "20px", borderRadius: "15px" }} elevation={6}>
       <div className={classes.card}>
@@ -87,7 +87,7 @@ const PostDetails = () => {
           />
         </div>
       </div>
-      {!!recommendedPosts.length && (
+      {!!recommendedPosts?.length && (
         <div className={classes.section}>
           <Typography gutterBottom variant="h5">
             You might also like:

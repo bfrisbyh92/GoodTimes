@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Card,
   CardActions,
@@ -16,13 +16,13 @@ import { useDispatch } from "react-redux";
 import moment from "moment";
 import { useNavigate } from "react-router-dom";
 
-// eslint-disable-next-line
-import { getPost, likePost, deletePost } from "../../../actions/posts";
+import { likePost, deletePost } from "../../../actions/posts";
 import useStyles from "./styles";
 
 const Post = ({ post, setCurrentId }) => {
   const dispatch = useDispatch();
   const classes = useStyles();
+  const [likes, setLikes] = useState(post?.likes);
   const user = JSON.parse(localStorage.getItem("profile"));
   const navigate = useNavigate();
 
@@ -39,7 +39,8 @@ const Post = ({ post, setCurrentId }) => {
       ) : (
         <>
           <ThumbUpAltOutlined fontSize="small" />
-          {"  "}{post.likes.length} {post.likes.length === 1 ? "Like" : "Likes"}
+          {"  "}
+          {post.likes.length} {post.likes.length === 1 ? "Like" : "Likes"}
         </>
       );
     }
@@ -52,10 +53,25 @@ const Post = ({ post, setCurrentId }) => {
     );
   };
 
+  const userId = user?.result?._id;
+
   const openPost = () => {
     // dispatch(getPost(post._id, navigate));
 
     navigate(`/posts/${post._id}`);
+  };
+
+  const hasLikedPost = () =>
+    post.likes.find((like) => like === user?.result?._id);
+
+  const handleLike = async () => {
+    dispatch(likePost(post._id));
+
+    if (hasLikedPost) {
+      setLikes(post.likes.filter((id) => id !== userId));
+    } else {
+      setLikes([...post.likes, userId]);
+    }
   };
 
   return (
@@ -112,12 +128,12 @@ const Post = ({ post, setCurrentId }) => {
           size="small"
           color="primary"
           disabled={!user?.result}
-          onClick={() => dispatch(likePost(post._id))}
+          onClick={handleLike}
         >
           <Likes />
         </Button>
         <Button size="medium" color="inherit" onClick={openPost}>
-          <InfoIcon size={24} variant="outlined"/>
+          <InfoIcon size={24} variant="outlined" />
         </Button>
         {user?.result?._id === post?.creator && (
           <Button
