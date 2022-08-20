@@ -16,12 +16,12 @@ const router = express.Router();
 // Routes start with localhost:3000/posts
 router.get("/search", getPostsBySearch);
 router.get("/", getPosts);
-router.get('/:id', getPost)
+router.get("/:id", getPost);
 router.post("/", auth, createPost);
 router.patch("/:id", auth, updatePost);
 router.patch("/:id/likePost", auth, likePost);
 router.delete("/:id", auth, deletePost);
-router.post('/:id/commentPost', commentPost);
+router.post("/:id/commentPost", auth, commentPost);
 // ^^^ To post/patch/delete your JWT token has to be verified. Implementing Authorization.
 
 export default router;
